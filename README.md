@@ -27,3 +27,12 @@ A instenção é criar uma aplicação web que apartir da index seja retornado u
 
 * python app.py
 
+Acesse http://localhost:8080 em seu navegador para interagir com a aplicação.
+
+Neste exemplo, temos as seguintes rotas:
+
+    Rota inicial: '/' - Exibe uma mensagem de boas-vindas.
+    Rota de cadastro de usuário: '/cadastro' - Exibe um formulário de cadastro de usuário. Quando o formulário é enviado via método POST, o usuário é cadastrado e a mensagem de sucesso é exibida.
+    Rota de login: '/login' - Exibe um formulário de login. Quando o formulário é enviado via método POST, verifica-se se o usuário e senha correspondem aos dados cadastrados. Se forem corretos, uma mensagem de boas-vindas é exibida; caso contrário, uma mensagem de erro é exibida.
+
+ 
