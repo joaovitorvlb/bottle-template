@@ -22,6 +22,7 @@ A instenção é criar uma aplicação web que apartir da index seja retornado u
 ## Inatalação do micorframework bottle
 
 * pip install bottle
+* pip install PyJwt
 
 ## Execução da aplicação, ececutando o app.py
 
@@ -47,3 +48,43 @@ Para melhor organização e gerenciamento do projetos foi feita refatoração se
     - auth_controller.py
 - models/
     - user.py
+
+
+Para testar começaremos a trestar as rotas no postman:
+
+
+    Cadastro de Usuário:
+        Método: POST
+        URL: http://localhost:8080/cadastro
+        Cabeçalhos:
+            Content-Type: application/x-www-form-urlencoded
+        Corpo (form data):
+            username: [nome_de_usuario]
+            password: [senha]
+
+    Login de Usuário:
+        Método: POST
+        URL: http://localhost:8080/login
+        Cabeçalhos:
+            Content-Type: application/x-www-form-urlencoded
+        Corpo (form data):
+            username: [nome_de_usuario]
+            password: [senha]
+        Resposta: Você receberá um token JWT como resposta no corpo da mensagem.
+
+    Acesso à Rota Home:
+        Método: GET
+        URL: http://localhost:8080/
+        Cabeçalhos:
+            Authorization: Bearer [seu_token_jwt]
+
+Inclusive estamos peotegendo a rota index com jwt descrito abaixo.
+
+
+Substitua [nome_de_usuario] e [senha] pelos valores desejados para o cadastro e login. Para acessar a rota home, substitua [seu_token_jwt] pelo token JWT gerado após o login bem-sucedido.
+
+Certifique-se de ajustar a URL e a porta de acordo com a configuração do seu ambiente.
+
+Usando o Postman, você pode adicionar facilmente os cabeçalhos necessários para cada solicitação. Certifique-se de selecionar o método correto, definir a URL correta e incluir os cabeçalhos apropriados em cada solicitação.
+
+Lembre-se de que, para acessar a rota home, você deve fornecer o token JWT no cabeçalho Authorization, usando o prefixo Bearer.
