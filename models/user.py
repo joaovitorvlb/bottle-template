@@ -1,13 +1,31 @@
-class User:
-    usuarios = []
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from models.database import engine, Session
 
-    @classmethod
-    def create(cls, username, password):
-        cls.usuarios.append({'username': username, 'password': password})
+Base = declarative_base()
 
-    @classmethod
-    def authenticate(cls, username, password):
-        for usuario in cls.usuarios:
-            if usuario['username'] == username and usuario['password'] == password:
-                return True
-        return False
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50), unique=True)
+    password = Column(String(50))
+
+    @staticmethod
+    def authenticate(username, password):
+        session = Session()
+        user = session.query(User).filter_by(username=username, password=password).first()
+        session.close()
+        return user
+    
+    @staticmethod
+    def create(username, password):
+    
+        user = User(username=username, password=password)
+
+        # Adiciona os usuários à sessão e persiste no banco de dados
+        session = Session()
+        session.add(user)
+        session.commit()
+
+Base.metadata.create_all(engine)

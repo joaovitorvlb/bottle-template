@@ -3,6 +3,8 @@ from controllers.home_controller import HomeController
 from controllers.user_controller import UserController
 from controllers.auth_controller import AuthController
 from middleware import jwt_auth_middleware
+from models.database import engine
+from models.user import Base
 
 app = Bottle()
 
@@ -16,4 +18,5 @@ app.route('/login', method='GET', callback=AuthController.show_login_form)
 app.route('/login', method='POST', callback=AuthController.login)
 
 if __name__ == '__main__':
+    Base.metadata.create_all(engine)
     run(app, host='localhost', port=8080)
